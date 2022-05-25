@@ -13,10 +13,24 @@ void sin_wave(SDL_AudioDeviceID audio_device, t_note note)
     }
 }
 
+void sqr_wave(SDL_AudioDeviceID audio_device, t_note note)
+{
+    float x = 0;
+    for (int i = 0; i < FREQ * note.duration; i++)
+    {
+        // SDL_QueueAudio expects a signed 16-bit value
+        int16_t sample = ((float)i / (float)FREQ) * 2.0f * M_PI * note.pitch * GAIN;
+        SDL_QueueAudio(audio_device, &sample, SAMPLE_SIZE);
+    }
+}
+
 int main(int argc, char **argv)
 {
     if (argc != 2)
+    {
+        printf("usage: ./minisynth <file_name>");
         exit(-1);
+    }
     SDL_Init(SDL_INIT_AUDIO);
 
     char *file = argv[1];
@@ -52,10 +66,10 @@ int main(int argc, char **argv)
     note2.duration = 0.5f;
     note2.pitch = E * 16;
 
-    sin_wave(audio_device, note2);
+    sqr_wave(audio_device, note2);
     sin_wave(audio_device, note2);
     sin_wave(audio_device, note4);
-    sin_wave(audio_device, note2);
+    sqr_wave(audio_device, note2);
     sin_wave(audio_device, note);
     sin_wave(audio_device, note3);
     //-------------------------

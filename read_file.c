@@ -9,12 +9,13 @@ void read_file(char *file, t_song *song)
     fd = open(file, O_RDONLY);
     if (fd < 0)
     {
-        perror("File not opened)");
+        perror("Error opening file");
         exit(-1);
     }
     while (get_next_line(fd, &line) == 1)
     {
-        song->tracks += 1;
+        if (!song->tempo)
+            song->tracks += 1;
         free(line);
     }
     close(fd);
