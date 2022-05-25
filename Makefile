@@ -18,7 +18,7 @@ all: $(NAME)
 #@make -C libft/ re
 $(NAME):
 	
-	$(CC) $(INCLUDES) $(SRC) $(LIB) $(FW) -o $(NAME) -flto
+	$(CC) $(INCLUDES) $(SRC) $(LIB) -o $(NAME) -flto
 #@make -C libft/ clean
 clean:
 	
