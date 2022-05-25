@@ -13,9 +13,15 @@ void sin_wave(SDL_AudioDeviceID audio_device, t_note note)
     }
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
+    if (argc != 2)
+        exit(-1);
     SDL_Init(SDL_INIT_AUDIO);
+
+    char *file = argv[1];
+    t_song song;
+    read_file(file, &song);
 
     // the representation of our audio device in SDL:
     SDL_AudioDeviceID audio_device;
@@ -32,6 +38,7 @@ int main(void)
     audio_device = SDL_OpenAudioDevice(
         NULL, 0, &audio_spec, NULL, 0);
 
+    //-----------------------
     t_note note;
     note.duration = 0.5f;
     note.pitch = G * 16;
@@ -51,6 +58,8 @@ int main(void)
     sin_wave(audio_device, note2);
     sin_wave(audio_device, note);
     sin_wave(audio_device, note3);
+    //-------------------------
+
     // unpausing the audio device (starts playing):
     SDL_PauseAudioDevice(audio_device, 0);
 

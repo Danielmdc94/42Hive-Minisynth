@@ -4,28 +4,28 @@ CC = clang
 
 CFLAGS = -Wall -Wextra -Werror
 
-INCLUDES = -I/Users/dpalacio/.brew/include/SDL2 -D_THREAD_SAFE
-#-I ./libft/ -I /usr/local/include 
-LIB =  -L/Users/dpalacio/.brew/lib -lSDL2 
-#-L ./libft -lft -L /usr/local/lib/ -lmlx
+INCLUDES = -I ./libft/ -I/Users/dpalacio/.brew/include/SDL2 -D_THREAD_SAFE
+# -I /usr/local/include 
+LIB = -L ./libft -lft  -L/Users/dpalacio/.brew/lib -lSDL2 
+#-L /usr/local/lib/ -lmlx
 #FW = -framework OpenGL -framework AppKit
 
-SRC = main.c
+SRC = main.c read_file.c
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
-#@make -C libft/ re
+#
 $(NAME):
-	
+	@make -C libft/ re
 	$(CC) $(INCLUDES) $(SRC) $(LIB) -o $(NAME) -flto
-#@make -C libft/ clean
+#
 clean:
-	
+	@make -C libft/ clean
 	/bin/rm -f $(OBJ)
-#@make -C libft/ fclean
+#
 fclean: clean
-	
+	@make -C libft/ fclean
 	/bin/rm -f $(NAME)
 
 re: fclean all

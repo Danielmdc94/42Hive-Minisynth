@@ -1,6 +1,8 @@
 #ifndef MINISYNTH_H
 #define MINISYNTH_H
 
+#include "libft/libft.h"
+#include "get_next_line.h"
 #include <math.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -17,6 +19,14 @@
 #define G 24.50
 #define A 27.50
 #define B 30.87
+#define SILENCE 0.0
+
+typedef struct s_song
+{
+    float tempo;
+    int tracks;
+
+} t_song;
 
 /*-------NOTE------*/
 typedef struct s_note
@@ -24,7 +34,10 @@ typedef struct s_note
     float pitch;
     int octave;
     float duration;
+    void *next;
 
 } t_note;
+
+void read_file(char *file, t_song *song);
 
 #endif
