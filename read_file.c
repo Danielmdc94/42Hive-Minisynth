@@ -1,5 +1,7 @@
 #include "minisynth.h"
 
+static void fill_tracks(char *file, t_song *song);
+
 void read_file(char *file, t_song *song)
 {
     char *line;
@@ -40,6 +42,7 @@ void read_file(char *file, t_song *song)
         }
         free(line);
     }
+    fill_tracks(file, song);
     // TEST PRINT----------------------
     close(fd);
     printf("%d\n", song->tempo);
@@ -50,5 +53,35 @@ void read_file(char *file, t_song *song)
         printf("%s, ", song->instruments[i]);
         i++;
     }
+    i = 0;
+    while (i < song->n_tracks)
+    {
+        printf("\n%s\n", song->tracks[i]);
+        i++;
+    }
     //---------------------------------
+}
+
+static void fill_tracks(char *file, t_song *song)
+{
+    char *line;
+    int fd;
+
+    fd = open(file, O_RDONLY);
+    if (fd < 0)
+    {
+        perror("Error opening file");
+        exit(-1);
+    }
+    song->tracks = (char **)ft_memalloc(sizeof(char **) * song->n_tracks);
+    int i = 0;
+    while (get_next_line(fd, &line) == 1)
+    {
+        if (ft_atoi(line) > 0 && *line != '#' && *line)
+        {
+            song->tracks[i] = ft_strdup(line);
+            i++;
+        }
+        free(line);
+    }
 }
