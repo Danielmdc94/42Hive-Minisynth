@@ -1,22 +1,36 @@
 #include "minisynth.h"
 
-void sin_wave(SDL_AudioDeviceID audio_device, t_note note)
+void sin_wave(SDL_AudioDeviceID audio_device, t_song *song, t_note note)
 {
-    float x = 0;
     for (int i = 0; i < FREQ * note.duration; i++)
     {
-        int16_t sample = sin(((float)i / (float)FREQ) * 2.0f * M_PI * note.pitch) * GAIN;
-        SDL_QueueAudio(audio_device, &sample, SAMPLE_SIZE);
+        song->sample = sin(((float)i / (float)FREQ) * 2.0f * M_PI * note.pitch) * GAIN;
+        SDL_QueueAudio(audio_device, &song->sample, SAMPLE_SIZE);
     }
 }
 
-void sqr_wave(SDL_AudioDeviceID audio_device, t_note note)
+void sqr_wave(SDL_AudioDeviceID audio_device, t_song *song, t_note note)
 {
-    float x = 0;
     for (int i = 0; i < FREQ * note.duration; i++)
     {
-        // int16_t sample =
-        // SDL_QueueAudio(audio_device, &sample, SAMPLE_SIZE);
+        song->sample = sin(((float)i / (float)FREQ) * 2.0f * M_PI * note.pitch) * GAIN;
+        SDL_QueueAudio(audio_device, &song->sample, SAMPLE_SIZE);
+    }
+}
+void tri_wave(SDL_AudioDeviceID audio_device, t_song *song, t_note note)
+{
+    for (int i = 0; i < FREQ * note.duration; i++)
+    {
+        song->sample = sin(((float)i / (float)FREQ) * 2.0f * M_PI * note.pitch) * GAIN;
+        SDL_QueueAudio(audio_device, &song->sample, SAMPLE_SIZE);
+    }
+}
+void saw_wave(SDL_AudioDeviceID audio_device, t_song *song, t_note note)
+{
+    for (int i = 0; i < FREQ * note.duration; i++)
+    {
+        song->sample = sin(((float)i / (float)FREQ) * 2.0f * M_PI * note.pitch) * GAIN;
+        SDL_QueueAudio(audio_device, &song->sample, SAMPLE_SIZE);
     }
 }
 
@@ -47,33 +61,10 @@ int main(int argc, char **argv)
 
     build_track(audio_device, &song);
 
-    //-----------------------
-    /*    t_note note;
-        note.duration = 0.5f;
-        note.octave = 4;
-        note.pitch = G * powf(2, note.octave);
-        t_note note2;
-        note2.duration = 0.5f;
-        note2.pitch = D * 16;
-        t_note note3;
-        note3.duration = 0.5f;
-        note3.pitch = F * 16;
-        t_note note4;
-        note2.duration = 0.5f;
-        note2.pitch = E * 16;
-
-            sin_wave(audio_device, note2);
-            sin_wave(audio_device, note2);
-            sin_wave(audio_device, note4);
-            sin_wave(audio_device, note2);
-            sin_wave(audio_device, note);
-            sin_wave(audio_device, note3);*/
-    //-------------------------
-
     // unpausing the audio device (starts playing):
     SDL_PauseAudioDevice(audio_device, 0);
 
-    SDL_Delay(20000);
+    SDL_Delay(song.length * 1000);
 
     SDL_CloseAudioDevice(audio_device);
     SDL_Quit();

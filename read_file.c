@@ -10,6 +10,9 @@ void read_file(char *file, t_song *song)
     song->tempo = 0;
     song->n_tracks = 0;
     song->instruments = NULL;
+    song->tracks = NULL;
+    song->length = 0.0;
+    song->sample = 0.0;
     fd = open(file, O_RDONLY);
     if (fd < 0)
     {
@@ -43,24 +46,6 @@ void read_file(char *file, t_song *song)
         free(line);
     }
     fill_tracks(file, song);
-    /*/ TEST PRINT----------------------
-    close(fd);
-    printf("%d\n", song->tempo);
-    printf("%d\n", song->n_tracks);
-    int i = 0;
-    while (i < song->n_tracks)
-    {
-        printf("%s, ", song->instruments[i]);
-        i++;
-    }
-    i = 0;
-    while (i < song->n_tracks)
-    {
-        printf("\n%s\n", song->tracks[i]);
-        i++;
-    }
-    */
-    //---------------------------------
 }
 
 static void fill_tracks(char *file, t_song *song)

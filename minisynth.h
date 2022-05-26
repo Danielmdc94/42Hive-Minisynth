@@ -28,6 +28,8 @@ typedef struct s_song
     int n_tracks;
     char **instruments;
     char **tracks;
+    float length;
+    int16_t sample;
 
 } t_song;
 
@@ -43,6 +45,9 @@ void read_file(char *file, t_song *song);
 
 void build_track(SDL_AudioDeviceID audio_device, t_song *song);
 
-void sin_wave(SDL_AudioDeviceID audio_device, t_note note);
+void sin_wave(SDL_AudioDeviceID audio_device, t_song *song, t_note note);
+void sqr_wave(SDL_AudioDeviceID audio_device, t_song *song, t_note note);
+void tri_wave(SDL_AudioDeviceID audio_device, t_song *song, t_note note);
+void saw_wave(SDL_AudioDeviceID audio_device, t_song *song, t_note note);
 
 #endif
