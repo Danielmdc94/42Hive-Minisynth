@@ -20,11 +20,11 @@ void build_track(SDL_AudioDeviceID audio_device, t_song *song)
             char name = song->tracks[t][i];
             i++;
             if (song->tracks[t][i] == '#')
-                note.alteration == 1;
+                note.alteration = 1;
             else if (song->tracks[t][i] == 'b')
-                note.alteration == -1;
+                note.alteration = -1;
             else
-                note.alteration == 0;
+                note.alteration = 0;
 
             if (ft_isdigit(song->tracks[t][i]))
             {

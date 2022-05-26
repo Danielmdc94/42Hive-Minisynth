@@ -39,6 +39,7 @@ typedef struct s_note
     float pitch;
     int octave;
     float duration;
+    int alteration;
 } t_note;
 
 void read_file(char *file, t_song *song);
