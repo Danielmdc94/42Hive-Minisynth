@@ -43,7 +43,7 @@ void read_file(char *file, t_song *song)
         free(line);
     }
     fill_tracks(file, song);
-    // TEST PRINT----------------------
+    /*/ TEST PRINT----------------------
     close(fd);
     printf("%d\n", song->tempo);
     printf("%d\n", song->n_tracks);
@@ -59,6 +59,7 @@ void read_file(char *file, t_song *song)
         printf("\n%s\n", song->tracks[i]);
         i++;
     }
+    */
     //---------------------------------
 }
 

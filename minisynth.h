@@ -37,10 +37,12 @@ typedef struct s_note
     float pitch;
     int octave;
     float duration;
-    void *next;
-
 } t_note;
 
 void read_file(char *file, t_song *song);
+
+void build_track(SDL_AudioDeviceID audio_device, t_song *song);
+
+void sin_wave(SDL_AudioDeviceID audio_device, t_note note);
 
 #endif

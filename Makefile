@@ -10,20 +10,20 @@ LIB = -L ./libft -lft  -L/Users/dpalacio/.brew/lib -lSDL2
 #-L /usr/local/lib/ -lmlx
 #FW = -framework OpenGL -framework AppKit
 
-SRC = main.c read_file.c
+SRC = main.c read_file.c build_notes.c
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
-#
+
 $(NAME):
 	@make -C libft/ re
 	$(CC) $(INCLUDES) $(SRC) $(LIB) -o $(NAME) -flto
-#
+
 clean:
 	@make -C libft/ clean
 	/bin/rm -f $(OBJ)
-#
+
 fclean: clean
 	@make -C libft/ fclean
 	/bin/rm -f $(NAME)
