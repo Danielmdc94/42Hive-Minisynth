@@ -38,55 +38,117 @@ void build_track(SDL_AudioDeviceID audio_device, t_song *song)
         {
             i++;
             if (ft_isdigit(song->tracks[t][i]))
+            {
                 note.octave = song->tracks[t][i] - '0';
+                i++;
+            }
             note.pitch = D * (pow(2, note.octave));
+            if (song->tracks[t][i] == '/')
+            {
+                i++;
+                temp = temp + i;
+                note.duration = atof(temp);
+                temp = temp - i;
+                printf("%f\n", note.duration);
+            }
             sin_wave(audio_device, note);
         }
         if (song->tracks[t][i] == 'e')
         {
             i++;
             if (ft_isdigit(song->tracks[t][i]))
+            {
                 note.octave = song->tracks[t][i] - '0';
+                i++;
+            }
             note.pitch = E * (pow(2, note.octave));
+            if (song->tracks[t][i] == '/')
+            {
+                i++;
+                temp = temp + i;
+                note.duration = atof(temp);
+                temp = temp - i;
+                printf("%f\n", note.duration);
+            }
             sin_wave(audio_device, note);
         }
         if (song->tracks[t][i] == 'f')
         {
             i++;
             if (ft_isdigit(song->tracks[t][i]))
+            {
                 note.octave = song->tracks[t][i] - '0';
+                i++;
+            }
             note.pitch = F * (pow(2, note.octave));
+            if (song->tracks[t][i] == '/')
+            {
+                i++;
+                temp = temp + i;
+                note.duration = atof(temp);
+                temp = temp - i;
+                printf("%f\n", note.duration);
+            }
             sin_wave(audio_device, note);
         }
         if (song->tracks[t][i] == 'g')
         {
             i++;
             if (ft_isdigit(song->tracks[t][i]))
+            {
                 note.octave = song->tracks[t][i] - '0';
+                i++;
+            }
             note.pitch = G * (pow(2, note.octave));
+            if (song->tracks[t][i] == '/')
+            {
+                i++;
+                temp = temp + i;
+                note.duration = atof(temp);
+                temp = temp - i;
+                printf("%f\n", note.duration);
+            }
             sin_wave(audio_device, note);
         }
         if (song->tracks[t][i] == 'a')
         {
             i++;
             if (ft_isdigit(song->tracks[t][i]))
+            {
                 note.octave = song->tracks[t][i] - '0';
+                i++;
+            }
             note.pitch = A * (pow(2, note.octave));
+            if (song->tracks[t][i] == '/')
+            {
+                i++;
+                temp = temp + i;
+                note.duration = atof(temp);
+                temp = temp - i;
+                printf("%f\n", note.duration);
+            }
             sin_wave(audio_device, note);
         }
         if (song->tracks[t][i] == 'b')
         {
             i++;
             if (ft_isdigit(song->tracks[t][i]))
+            {
                 note.octave = song->tracks[t][i] - '0';
+                i++;
+            }
             note.pitch = B * (pow(2, note.octave));
+            if (song->tracks[t][i] == '/')
+            {
+                i++;
+                temp = temp + i;
+                note.duration = atof(temp);
+                temp = temp - i;
+                printf("%f\n", note.duration);
+            }
             sin_wave(audio_device, note);
         }
-        if (song->tracks[t][i] == 'r')
-        {
-            note.pitch = SILENCE;
-            sin_wave(audio_device, note);
-        }
+
         i++;
     }
     // free(temp);
