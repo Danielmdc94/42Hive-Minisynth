@@ -71,7 +71,6 @@ int main(int argc, char **argv)
 
     build_track(audio_device, &song);
 
-    // unpausing the audio device (starts playing):
     SDL_PauseAudioDevice(audio_device, 0);
 
     SDL_Delay(song.length * 1000);

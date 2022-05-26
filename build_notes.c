@@ -6,10 +6,6 @@ void build_track(SDL_AudioDeviceID audio_device, t_song *song)
     int t = 0;
     int i = 0;
 
-    //    while (t < song->n_tracks)
-    //    {
-    //
-    //    }
     char *temp = ft_strdup(song->tracks[t]);
     note.duration = 1;
     note.octave = 4;
@@ -20,9 +16,15 @@ void build_track(SDL_AudioDeviceID audio_device, t_song *song)
             char name = song->tracks[t][i];
             i++;
             if (song->tracks[t][i] == '#')
+            {
                 note.alteration = 1;
+                i++;
+            }
             else if (song->tracks[t][i] == 'b')
+            {
                 note.alteration = -1;
+                i++;
+            }
             else
                 note.alteration = 0;
 
@@ -47,6 +49,10 @@ void build_track(SDL_AudioDeviceID audio_device, t_song *song)
                 note.pitch = B * (pow(2, note.octave));
             if (name == 'r')
                 note.pitch = SILENCE;
+            if (note.alteration == 1)
+                note.pitch = note.pitch * 1.0594630943592953;
+            if (note.alteration == 1)
+                note.pitch = note.pitch * 0.9438743126816934;
             if (song->tracks[t][i] == '/')
             {
                 i++;
