@@ -11,7 +11,7 @@ void build_track(SDL_AudioDeviceID audio_device, t_song *song)
     //
     //    }
     char *temp = ft_strdup(song->tracks[t]);
-    note.duration = 0.5;
+    note.duration = 1;
     note.octave = 4;
     while (song->tracks[t][i] != '\0')
     {
@@ -19,6 +19,13 @@ void build_track(SDL_AudioDeviceID audio_device, t_song *song)
         {
             char name = song->tracks[t][i];
             i++;
+            if (song->tracks[t][i] == '#')
+                note.alteration == 1;
+            else if (song->tracks[t][i] == 'b')
+                note.alteration == -1;
+            else
+                note.alteration == 0;
+
             if (ft_isdigit(song->tracks[t][i]))
             {
                 note.octave = song->tracks[t][i] - '0';
@@ -44,7 +51,7 @@ void build_track(SDL_AudioDeviceID audio_device, t_song *song)
             {
                 i++;
                 temp = temp + i;
-                note.duration = atof(temp) * song->tempo / 60;
+                note.duration = atof(temp) * 60 / song->tempo;
                 song->length = song->length + note.duration;
                 temp = temp - i;
             }
@@ -56,7 +63,6 @@ void build_track(SDL_AudioDeviceID audio_device, t_song *song)
                 tri_wave(audio_device, song, note);
             if (ft_strcmp(song->instruments[t], "saw") == 0)
                 saw_wave(audio_device, song, note);
-            sin_wave(audio_device, song, note);
         }
         i++;
     }

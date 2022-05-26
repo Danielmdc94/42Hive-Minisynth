@@ -14,6 +14,11 @@ void sqr_wave(SDL_AudioDeviceID audio_device, t_song *song, t_note note)
     for (int i = 0; i < FREQ * note.duration; i++)
     {
         song->sample = sin(((float)i / (float)FREQ) * 2.0f * M_PI * note.pitch) * GAIN;
+        song->sample += 1.0 / 3.0 * sin((((float)i / (float)FREQ) * 3) * 2 * M_PI * note.pitch) * GAIN;
+        song->sample += 1.0 / 5.0 * sin((((float)i / (float)FREQ) * 5) * 2 * M_PI * note.pitch) * GAIN;
+        song->sample += 1.0 / 7.0 * sin((((float)i / (float)FREQ) * 7) * 2 * M_PI * note.pitch) * GAIN;
+        song->sample += 1.0 / 9.0 * sin((((float)i / (float)FREQ) * 9) * 2 * M_PI * note.pitch) * GAIN;
+        song->sample += 1.0 / 11.0 * sin((((float)i / (float)FREQ) * 11) * 2 * M_PI * note.pitch) * GAIN;
         SDL_QueueAudio(audio_device, &song->sample, SAMPLE_SIZE);
     }
 }
@@ -21,7 +26,12 @@ void tri_wave(SDL_AudioDeviceID audio_device, t_song *song, t_note note)
 {
     for (int i = 0; i < FREQ * note.duration; i++)
     {
-        song->sample = sin(((float)i / (float)FREQ) * 2.0f * M_PI * note.pitch) * GAIN;
+        song->sample = (sin(((float)i / (float)FREQ) * 2.0f * M_PI * note.pitch) + 4) * GAIN;
+        song->sample += (pow(3, -2) * (-sin(((float)i / (float)FREQ) * 3))) * GAIN;
+        song->sample += (pow(5, -2) * (-sin(((float)i / (float)FREQ) * 5))) * GAIN;
+        song->sample += (pow(7, -2) * (-sin(((float)i / (float)FREQ) * 7))) * GAIN;
+        song->sample += (pow(9, -2) * (-sin(((float)i / (float)FREQ) * 9))) * GAIN;
+        song->sample += (pow(11, -2) * (-sin(((float)i / (float)FREQ) * 11))) * GAIN;
         SDL_QueueAudio(audio_device, &song->sample, SAMPLE_SIZE);
     }
 }
@@ -29,7 +39,7 @@ void saw_wave(SDL_AudioDeviceID audio_device, t_song *song, t_note note)
 {
     for (int i = 0; i < FREQ * note.duration; i++)
     {
-        song->sample = sin(((float)i / (float)FREQ) * 2.0f * M_PI * note.pitch) * GAIN;
+        song->sample = (-((1.5 * GAIN) / M_PI) * (tan(-(note.pitch * ((float)i / (float)FREQ)))));
         SDL_QueueAudio(audio_device, &song->sample, SAMPLE_SIZE);
     }
 }
