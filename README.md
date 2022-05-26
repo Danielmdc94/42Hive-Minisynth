@@ -1,7 +1,7 @@
 # 42Hive-Minisynth
 
 Dependencies:
--SDL Library
+- SDL Library
 
 Instrucctions:
 - Install SDL2 library (can be done with brew: ```brew install sdl2```.
