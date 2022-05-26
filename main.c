@@ -1,6 +1,4 @@
 #include "minisynth.h"
-#include <stdio.h>
-#include <SDL.h>
 
 void sin_wave(SDL_AudioDeviceID audio_device, t_note note)
 {
@@ -86,11 +84,11 @@ int main(int argc, char **argv)
     while (i < song.n_tracks)
     {
         free(song.instruments[i]);
-        // free(song.tracks[i]);
+        free(song.tracks[i]);
         i++;
     }
     free(song.instruments);
-    // free(song.tracks);
+    free(song.tracks);
 
     return 0;
 }

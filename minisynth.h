@@ -21,6 +21,7 @@
 #define B 30.87
 #define SILENCE 0.0
 
+/*-------SONG------*/
 typedef struct s_song
 {
     int tempo;
