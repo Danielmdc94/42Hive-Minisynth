@@ -18,9 +18,8 @@ void sqr_wave(SDL_AudioDeviceID audio_device, t_note note)
     float x = 0;
     for (int i = 0; i < FREQ * note.duration; i++)
     {
-        // SDL_QueueAudio expects a signed 16-bit value
-        int16_t sample = ((float)i / (float)FREQ) * 2.0f * M_PI * note.pitch * GAIN;
-        SDL_QueueAudio(audio_device, &sample, SAMPLE_SIZE);
+        // int16_t sample =
+        // SDL_QueueAudio(audio_device, &sample, SAMPLE_SIZE);
     }
 }
 
@@ -55,7 +54,8 @@ int main(int argc, char **argv)
     //-----------------------
     t_note note;
     note.duration = 0.5f;
-    note.pitch = G * 16;
+    note.octave = 4;
+    note.pitch = G * powf(2, note.octave);
     t_note note2;
     note2.duration = 0.5f;
     note2.pitch = D * 16;
@@ -66,12 +66,12 @@ int main(int argc, char **argv)
     note2.duration = 0.5f;
     note2.pitch = E * 16;
 
-    sqr_wave(audio_device, note2);
-    sin_wave(audio_device, note2);
-    sin_wave(audio_device, note4);
-    sqr_wave(audio_device, note2);
-    sin_wave(audio_device, note);
-    sin_wave(audio_device, note3);
+    //    sin_wave(audio_device, note2);
+    //    sin_wave(audio_device, note2);
+    //    sin_wave(audio_device, note4);
+    //    sin_wave(audio_device, note2);
+    //    sin_wave(audio_device, note);
+    //    sin_wave(audio_device, note3);
     //-------------------------
 
     // unpausing the audio device (starts playing):
@@ -81,6 +81,16 @@ int main(int argc, char **argv)
 
     SDL_CloseAudioDevice(audio_device);
     SDL_Quit();
+
+    int i = 0;
+    while (i < song.n_tracks)
+    {
+        free(song.instruments[i]);
+        // free(song.tracks[i]);
+        i++;
+    }
+    free(song.instruments);
+    // free(song.tracks);
 
     return 0;
 }

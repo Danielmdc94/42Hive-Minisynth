@@ -23,8 +23,10 @@
 
 typedef struct s_song
 {
-    float tempo;
-    int tracks;
+    int tempo;
+    int n_tracks;
+    char **instruments;
+    char **tracks;
 
 } t_song;
 
