@@ -11,5 +11,4 @@ Instructions:
 - Run with ```./minisynth <filename>```. Valid files are provided in the directory "examples"
 
 Disclaimer:
-Currently the program only plays one track at a time. You can choose the track to play changit the value of 't' in
-the build_notes.c file, line 6.
+Currently the program only plays one track at a time. You can choose the track to play changing the value of 't' in the build_notes.c file, line 6.
