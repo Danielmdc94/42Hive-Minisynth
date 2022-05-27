@@ -51,7 +51,7 @@ void build_track(SDL_AudioDeviceID audio_device, t_song *song)
                 note.pitch = SILENCE;
             if (note.alteration == 1)
                 note.pitch = note.pitch * 1.0594630943592953;
-            if (note.alteration == 1)
+            if (note.alteration == -1)
                 note.pitch = note.pitch * 0.9438743126816934;
             if (song->tracks[t][i] == '/')
             {
