@@ -30,7 +30,6 @@ void read_file(char *file, t_song *song)
                 free(temp[0]);
                 free(temp[1]);
                 free(temp);
-                song->n_tracks -= 1;
             }
             if (song->tempo == 0)
             {
@@ -39,9 +38,9 @@ void read_file(char *file, t_song *song)
                 free(temp[0]);
                 free(temp[1]);
                 free(temp);
-                song->n_tracks -= 1;
             }
-            song->n_tracks += 1;
+            if (ft_atoi(line) > song->n_tracks)
+                song->n_tracks = ft_atoi(line);
         }
         free(line);
     }
@@ -60,13 +59,19 @@ static void fill_tracks(char *file, t_song *song)
         exit(-1);
     }
     song->tracks = (char **)ft_memalloc(sizeof(char **) * song->n_tracks);
-    int i = 0;
     while (get_next_line(fd, &line) == 1)
     {
-        if (ft_atoi(line) > 0 && *line != '#' && *line)
+        int cur_track = ft_atoi(line) - 1;
+        if (cur_track > -1 && *line != '#' && *line)
         {
-            song->tracks[i] = ft_strdup(line);
-            i++;
+            if (!song->tracks[cur_track])
+                song->tracks[cur_track] = ft_strdup(line);
+            else
+            {
+                char *temp = ft_strjoin(song->tracks[cur_track], &((line)[2]));
+                free(song->tracks[cur_track]);
+                song->tracks[cur_track] = temp;
+            }
         }
         free(line);
     }
