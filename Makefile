@@ -4,9 +4,9 @@ CC = clang
 
 CFLAGS = -Wall -Wextra -Werror
 
-INCLUDES = -I ./libft/ -I/Users/dpalacio/.brew/include/SDL2 -D_THREAD_SAFE
+INCLUDES = -I ./libft/ $(shell sdl2-config --cflags)
 # -I /usr/local/include 
-LIB = -L ./libft -lft  -L/Users/dpalacio/.brew/lib -lSDL2 
+LIB = -L ./libft -lft  $(shell sdl2-config --libs)
 #-L /usr/local/lib/ -lmlx
 #FW = -framework OpenGL -framework AppKit
 
